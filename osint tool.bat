@@ -1,35 +1,8 @@
 
 @echo off
-setlocal enabledelayedexpansion
 chcp 65001 >nul
 title Osint tool
 color b
-goto autoupdater
-
-:autoupdater
-set "update_url=https://raw.githubusercontent.com/EpicGroupForEpicPeople/Osint-multitool/refs/heads/main/osint%20tool.bat"
-set "temp_file=%temp%\updated.bat"
-
-echo Downloading the latest version...
-curl -s -o "%temp_file%" "%update_url%"
-if not exist "%temp_file%" (
-    echo Failed to download the update. Exiting...
-    pause
-    exit /b
-)
-
-echo Updating the script...
-move /y "%temp_file%" "%~f0" >nul
-if %errorlevel% neq 0 (
-    echo Failed to update the script. Exiting...
-    pause
-    exit /b
-)
-
-echo Restarting the updated script...
-start "" "%~f0"
-exit
-
 :menu
 type menu.py
 echo.
